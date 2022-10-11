@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { /* 마진값을 없애기 위해 */
+            margin: 0;
+            padding: 0;
+        }
+        .content { /*스크롤을 만들기 위해 높이가 있는 css 추가*/
+            width: 100%;
+            height: 3000px;
+            background-color: antiquewhite;
+        }
+        .progressbar { /* progress를 감싸고, 위치와 크기조절*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            z-index: 500;
+        }
+        .progress {
+            width: 0%; /*프로그래스바 진행정도*/
+            height: 100%;
+            background-color: blue;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- 들어갈 컨텐츠 공간지정 -->
+        <div class="content"></div>
+
+        <!-- 프로그래스 바 div-->
+        <div id="progressbar" class="progressbar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function(){
+            window.addEventListener("scroll", function(){
+                // 프로그래스 바가 있다면 실행할 수 있도록
+                if( document.querySelector(".progressbar") != null) {
+                    // 프로그래스바 세팅함수 실행
+                    setProgress();
+                }
+            })
+        })
+
+        // progress의 width를 스크롤 길이에 따라서 수정
+        function setProgress(){
+            // 스크롤한 높이
+            let curreY = document.documentElement.scrollTop;
+            console.log(curreY);
+            // 전체 높이
+            let totalY = document.documentElement.scrollHeight-document.documentElement.clientHeight;
+            console.log(totalY);
+
+            // 퍼센트로 바꿔서 progress css의width값에 넣어주기
+            let percentage = (curreY/totalY)*100;
+            document.querySelector(".progress").style.width= percentage+"%";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+    <style>
+        .my-box {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            border: 10px solid orange;
+        }
+        .my-position {
+            position: fixed ;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="title-btn">효과</button>
+    <h1 id="title">안녕하세요</h1>
+
+    <button id="toggle-btn">토글 버튼</button>
+    <div>
+        <p>이 요소는 div안의p요소 입니다</p>
+        <p>toggle을 통해 효과를 주었습니다</p>
+    </div>
+
+    <button id="box-fade">버튼</button>
+    <div class="my-box"></div>
+
+    <button id="box-slide"> 슬라이드 버튼</button>
+    <div class="my-box my-position"></div>
+
+    <script>
+        $("#title-btn").on("click", function() {
+            $("#title").toggle("fast");
+        })
+
+        $("#toggle-btn+div").hide();
+        $("#toggle-btn").on("click", function() {
+            $(this).next().toggle("slow");
+        })
+
+        $("#box-fade").on("mouseenter mouseleave", function() {
+            $(this).next().fadeToggle("fast");
+        })
+
+        $("#box-slide").on("click", function() {
+            $(this).next().slideToggle("slow");
+        })
+    </script>
+</body>
+</html>
